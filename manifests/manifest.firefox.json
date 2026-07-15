@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "KirillTube — YouTube Intelligence",
+  "short_name": "KirillTube",
+  "version": "1.2.0",
+  "description": "Поиск видео-близнецов, похожих каналов, ДНК канала, Content Gap, тренды и идеи прямо на YouTube.",
+  "permissions": ["storage", "tabs", "activeTab"],
+  "host_permissions": [
+    "https://www.youtube.com/*",
+    "https://youtube.com/*",
+    "https://www.googleapis.com/*",
+    "https://youtube.googleapis.com/*"
+  ],
+  "background": { "scripts": ["background.js"] },
+  "action": {
+    "default_title": "KirillTube",
+    "default_popup": "popup.html"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*", "https://youtube.com/*"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "kirilltube@local.extension",
+      "strict_min_version": "109.0"
+    }
+  }
+}
