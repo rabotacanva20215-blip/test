@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Настройки KirillTube</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <main>
+    <header><span>K▶</span><div><h1>Настройки KirillTube</h1><p>API, размер панели и читаемость интерфейса</p></div></header>
+    <section>
+      <h2>YouTube Data API v3</h2>
+      <p>Для поиска публичных роликов и каналов нужен ключ типа <b>Public data</b>.</p>
+      <label>API key<input id="youtubeApiKey" type="password" placeholder="AIza…"></label>
+      <div class="row"><button id="toggleKey">Показать ключ</button><button id="testKey">Проверить ключ</button></div>
+      <div id="apiResult" class="notice">Ключ ещё не проверен.</div>
+    </section>
+    <section>
+      <h2>Поиск</h2>
+      <div class="grid">
+        <label>Язык релевантности<select id="locale"><option value="ru">Русский</option><option value="en">English</option></select></label>
+        <label>Регион<input id="regionCode" maxlength="2" value="RU"></label>
+        <label>Результатов<select id="resultLimit"><option>12</option><option>24</option><option>36</option><option>50</option></select></label>
+      </div>
+    </section>
+    <section>
+      <h2>Панель</h2>
+      <div class="grid">
+        <label>Масштаб текста<select id="textScale"><option value="90">90%</option><option value="100">100%</option><option value="110">110%</option><option value="120">120%</option><option value="130">130%</option><option value="140">140%</option></select></label>
+        <label>Ширина, px<input id="panelWidth" type="number" min="430" max="1800"></label>
+        <label>Высота, px<input id="panelHeight" type="number" min="520" max="1200"></label>
+      </div>
+      <p class="hint">Размер также можно менять мышью за правый нижний угол панели. Он сохраняется автоматически.</p>
+    </section>
+    <div class="savebar"><button id="save" class="primary">Сохранить настройки</button><span id="saved"></span></div>
+  </main>
+  <script src="options.js"></script>
+</body>
+</html>
