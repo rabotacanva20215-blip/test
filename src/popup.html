@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>KirillTube</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main>
+    <header><span class="logo">K▶</span><div><h1>KirillTube</h1><p>YouTube Content Intelligence</p></div></header>
+    <button id="openPanel" class="primary">Открыть панель на YouTube</button>
+    <section class="status" id="status"><i></i><div><strong>Проверяю API…</strong><span>Подождите несколько секунд</span></div></section>
+    <label for="apiKey">YouTube Data API key</label>
+    <div class="keyRow"><input id="apiKey" type="password" placeholder="AIza…" autocomplete="off"><button id="toggleKey" title="Показать ключ">◉</button></div>
+    <div class="actions"><button id="saveKey" class="primary">Сохранить и проверить</button><button id="settings">Настройки</button></div>
+    <footer><span>Alt + K</span><small>KirillTube 1.2</small></footer>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>
