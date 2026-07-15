@@ -1,0 +1,50 @@
+name: Build KirillTube extensions
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate JavaScript syntax
+        run: |
+          node --check src/background.js
+          node --check src/content.js
+          node --check src/popup.js
+          node --check src/options.js
+
+      - name: Build browser packages
+        run: |
+          set -euo pipefail
+          rm -rf dist release
+          mkdir -p dist/chromium dist/firefox release
+
+          cp src/background.js src/content.js src/content.css src/popup.html src/popup.css src/popup.js src/options.html src/options.css src/options.js dist/chromium/
+          cp src/background.js src/content.js src/content.css src/popup.html src/popup.css src/popup.js src/options.html src/options.css src/options.js dist/firefox/
+          cp manifests/manifest.chromium.json dist/chromium/manifest.json
+          cp manifests/manifest.firefox.json dist/firefox/manifest.json
+
+          (cd dist/chromium && zip -qr ../../release/KirillTube-1.2-Chromium.zip .)
+          (cd dist/firefox && zip -qr ../../release/KirillTube-1.2-Firefox.zip .)
+          cp release/KirillTube-1.2-Firefox.zip release/KirillTube-1.2-Firefox.xpi
+          zip -qr release/KirillTube-1.2-Source.zip src manifests README.md
+          (cd release && sha256sum KirillTube-1.2-* > KirillTube-1.2-SHA256.txt)
+
+      - name: Upload packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: KirillTube-1.2-Packages
+          path: release/*
+          if-no-files-found: error
+          retention-days: 30
